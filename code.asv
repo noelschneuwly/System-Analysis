@@ -1,0 +1,45 @@
+% Final Assignment
+
+% control parameters
+startTime = 0;
+endTime   = 1825; % 5 years to really see desertification process
+timeStep  = 1; % time step
+i = 1;
+
+% system parameters
+PPT = 0; % find appropriate values
+P = 0; % initial value
+k1 = 3;
+k2 = 5;
+W0 = 0.2;
+W = 0; % initial value
+cmax = 0.5;
+d = 0.1;
+b = 0.15;
+rw = 0; % find appropriate value
+
+% model initialization
+stateW = W;
+stateP = P;
+
+% vectors to store data
+iterations = floor((endTime - startTime)/timeStep) + 1;  % <-- minimal fix here
+timeV   = zeros(iterations, 1);
+waterV = zeros(iterations, 1);
+plantV   = zeros(iterations, 1);
+
+while startTime <= endTime
+    % write code here
+end 
+
+% --- plots ---
+figure;
+plot(timeV, plantV)
+hold on
+plot(timeV, waterV)
+xlabel("Time [days]")
+ylabel("Amount of Soil Water and")
+title("Snowshoe Hare and Lynx Population Model")
+legend("Lynx Population", "Snowshoe Hare Population")
+hold off
+max(predatorV)
