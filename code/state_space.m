@@ -15,14 +15,13 @@ rw = 0.1; % find appropriate value
 
 % --- control parameters ---
 startTime = 0;
-endTime   = 100;
-timeStep  = 0.1;
+endTime   = 1000;
+timeStep  = 0.02;
 
 % --- compute iteration count ---
 iterations = floor((endTime - startTime)/timeStep) + 1;
 
 % --- initialize vectors ---
-timeV   = zeros(iterations, 1);
 waterV  = zeros(iterations, 1);
 plantV  = zeros(iterations, 1);
 
@@ -34,7 +33,7 @@ stateP = P;
 for i = 1:iterations
     t = startTime + (i-1)*timeStep;
 
-    dWdt = PPT * ((stateP + k2 * W0) / (stateP + k2)) * stateW ...
+    dWdt = PPT * ((stateP + k2 * W0) / (stateP + k2)) ...
          - ((cmax * stateW) / (stateW + k1)) * stateP ...
          - (rw * stateW);
 
@@ -45,7 +44,6 @@ for i = 1:iterations
     stateP = stateP + dPdt * timeStep;
 
     % store
-    timeV(i)  = t;
     waterV(i) = stateW;
     plantV(i) = stateP;
 end
@@ -53,10 +51,8 @@ end
 
 % --- plots ---
 figure;
-plot(timeV, waterV)
-hold on
-plot(timeV, plantV)
-xlabel("Time [days]")
-ylabel("Amount of Soil Water and Plant Growth")
-title("Water-Vegetation Model for Desert Areas")
-legend("Soil Water", "Plants")
+plot(plantV, waterV)
+xlabel("Plant density [g/m^2]")
+ylabel("Soil water [mm]")
+title("Water-Vegetation State Space Diagram")
+legend("Soil Water and Plant Density")
