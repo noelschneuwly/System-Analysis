@@ -34,7 +34,7 @@ for j=1:4
 
     % --- control parameters ---
     startTime = 0;
-    endTime   = 500;
+    endTime   = 50;
     timeStep  = 0.02;
     
     % --- compute iteration count ---
@@ -97,5 +97,5 @@ figure(2)
 xlabel("Time [days]")
 ylabel("Plant Biomass [g/m^2]")
 title("Vegetation Dynamics for different W0 values")
-legend(legendEntriesPlant)
+legend(legendEntriesPlant, 'Location', 'Southeast')
     

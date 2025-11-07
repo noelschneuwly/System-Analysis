@@ -27,7 +27,7 @@ for j=1:4
     k1 = 3;
     k2 = k2vec(j);
     W0 = 0.2;
-    W = 0.1; % initial value
+    W = 0.2; % initial value
     cmax = 0.5;
     d = 0.1;
     b = 0.15;
@@ -35,7 +35,7 @@ for j=1:4
 
     % --- control parameters ---
     startTime = 0;
-    endTime   = 500;
+    endTime   = 50;
     timeStep  = 0.02;
     
     % --- compute iteration count ---
@@ -98,6 +98,6 @@ figure(2)
 xlabel("Time [days]")
 ylabel("Plant Biomass [g/m^2]")
 title("Vegetation Dynamics for different K2 values")
-legend(legendEntriesPlant)
+legend(legendEntriesPlant, 'Location', 'Southeast')
 
     
