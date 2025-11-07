@@ -2,7 +2,6 @@
 
 % Research Question 2
 
-
 % --- W0 parameter visualization ---
 k2vec = [5, 10, 15, 25];
 figure(1);
@@ -88,11 +87,18 @@ for j=1:4
 
 end 
 
+xlim([0 inf])
+ylim([0 30])
+
 figure(1)
 xlabel("Time [days]")
 ylabel("Soil Water content [mm]")
 title("Water Dynamics for different K2 values")
 legend(legendEntriesWater)
+
+
+xlim([0 inf])
+ylim([0 0.5])
 
 figure(2)
 xlabel("Time [days]")

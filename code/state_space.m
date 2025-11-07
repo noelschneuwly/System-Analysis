@@ -1,41 +1,45 @@
 % Final Assignment
 
-% system parameters
-PPT = 0.8; % find appropriate values
-P = [5, 5, 30, 30];
-e = 10;
-k1 = 3;
-k2 = 5;
-W0 = 0.2;
-W = [0.2, 1, 0.2, 1];
-cmax = 0.5;
-d = 0.1;
-b = 0.15;
-rw = 0.1; % find appropriate value
-
-% --- control parameters ---
-startTime = 0;
-endTime   = 1000;
-timeStep  = 0.02;
-
-% --- compute iteration count ---
-iterations = floor((endTime - startTime)/timeStep) + 1;
-
-% --- initialize vectors ---
-waterV  = zeros(iterations, 1);
-plantV  = zeros(iterations, 1);
+% --- coloring ---
+greenBase = [0, 0.6, 0];   % pure green
+greenLight = [0.5, 1, 0.5]; % light green
 
 
 figure;
+hold on
+legendEntriesPlant = {};
 % --- initialize state ---
 for j=1:4
-
+    
+    % system parameters
+    PPT = 0.8; % find appropriate values
+    P = [5, 5, 30, 30];
+    e = 10;
+    k1 = 3;
+    k2 = 5;
+    W0 = 0.2;
+    W = [0, 1, 0, 1];
+    cmax = 0.5;
+    d = 0.1;
+    b = 0.15;
+    rw = 0.1; % find appropriate value
+    
+    % --- control parameters ---
+    startTime = 0;
+    endTime   = 1000;
+    timeStep  = 0.02;
+    
+    % --- compute iteration count ---
+    iterations = floor((endTime - startTime)/timeStep) + 1;
+    
+    % --- initialize vectors ---
+    waterV  = zeros(iterations, 1);
+    plantV  = zeros(iterations, 1);
     stateW = W(j);
     stateP = P(j);
     
     % --- simulation loop ---
     for i = 1:iterations
-        t = startTime + (i-1)*timeStep;
     
         dWdt = PPT * ((stateP + k2 * W0) / (stateP + k2)) ...
              - ((cmax * stateW) / (stateW + k1)) * stateP ...
@@ -51,12 +55,30 @@ for j=1:4
         waterV(i) = stateW;
         plantV(i) = stateP;
     end
-    scatter(waterV, plantV)
-    hold on
+
+    % coloring
+    t = (j - 1) / 3;
+    plantColor = greenLight * (1 - t) + greenBase * t;
+    
+    % plot
+    scatter(waterV, plantV, 15, plantColor, 'filled')
+    legendEntriesPlant{end+1} = "Plant Density & Soil Water Content for initial value: (" + P(j) + ", " + W(j) + ")";
 end
 % --- plots ---
-xlabel("Soil water [mm]")
+
+
+equilibriumW = waterV(end);
+equilibrumP = plantV(end);
+scatter(waterV(end), plantV(end), 45, [0,0,1], 'filled')
+legendEntriesPlant{end+1} = "Point of Equilibrium: (" + equilibrumP + ", " + equilibriumW + ")";
+
+xlabel("Soil water content [mm]")
 ylabel("Plant density [g/m^2]")
 title("Water-Vegetation State Space Diagram")
-legend("Soil Water and Plant Density")
+legend(legendEntriesPlant)
+
+xlim([0 inf])
+ylim([0 60])
+axis manual
+
 hold off

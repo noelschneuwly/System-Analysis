@@ -26,7 +26,7 @@ for j=1:4
     k1 = 3;
     k2 = 5;
     W0 = w0vec(j);
-    W = 0.1; % initial value
+    W = 0.2; % initial value
     cmax = 0.5;
     d = 0.1;
     b = 0.15;
@@ -87,11 +87,17 @@ for j=1:4
 
 end 
 
+xlim([0 inf])
+ylim([0 35])
+
 figure(1)
 xlabel("Time [days]")
 ylabel("Soil Water content [mm]")
 title("Water Dynamics for different W0 values")
 legend(legendEntriesWater)
+
+xlim([0 inf])
+ylim([0 0.6])
 
 figure(2)
 xlabel("Time [days]")
