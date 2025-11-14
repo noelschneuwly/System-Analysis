@@ -78,11 +78,11 @@ for j=1:4
     % --- plots ---
     figure(1)
     plot(timeV, waterV, 'Color', waterColor, 'LineWidth', 2)
-    legendEntriesWater{end+1} = "Water (K2=" + k2vec(j) + ")";
+    legendEntriesWater{end+1} = "Soil Water Content [mm] (K2=" + k2vec(j) + ")";
 
     figure(2)
     plot(timeV, plantV, 'Color', plantColor, 'LineWidth', 2)
-    legendEntriesPlant{end+1} = "Plant (K2=" + k2vec(j) + ")";
+    legendEntriesPlant{end+1} = "Plant Biomass [g/m^2] (K2=" + k2vec(j) + ")";
 
 
 end 
@@ -93,7 +93,7 @@ ylim([0 30])
 figure(1)
 xlabel("Time [days]")
 ylabel("Soil Water content [mm]")
-title("Water Dynamics for different K2 values")
+title("Soil Water Dynamics for different K2 values")
 legend(legendEntriesWater)
 
 
@@ -103,7 +103,7 @@ ylim([0 0.5])
 figure(2)
 xlabel("Time [days]")
 ylabel("Plant Biomass [g/m^2]")
-title("Vegetation Dynamics for different K2 values")
+title("Plant Biomass Dynamics for different K2 values")
 legend(legendEntriesPlant, 'Location', 'Southeast')
 
     

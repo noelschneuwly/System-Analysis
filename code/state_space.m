@@ -62,7 +62,7 @@ for j=1:4
     
     % plot
     scatter(waterV, plantV, 15, plantColor, 'filled')
-    legendEntriesPlant{end+1} = "Plant Density & Soil Water Content for initial value: (" + P(j) + ", " + W(j) + ")";
+    legendEntriesPlant{end+1} = "Plant Biomass & Soil Water Content for initial value: (" + P(j) + ", " + W(j) + ")";
 end
 % --- plots ---
 
@@ -70,15 +70,15 @@ end
 equilibriumW = waterV(end);
 equilibrumP = plantV(end);
 scatter(waterV(end), plantV(end), 45, [0,0,1], 'filled')
-legendEntriesPlant{end+1} = "Point of Equilibrium: (" + equilibrumP + ", " + equilibriumW + ")";
+legendEntriesPlant{end+1} = "Point of Equilibrium: (" + equilibrumP + " g/m^2, " + equilibriumW + " mm)";
 
 xlabel("Soil water content [mm]")
-ylabel("Plant density [g/m^2]")
-title("Water-Vegetation State Space Diagram")
+ylabel("Plant Biomass [g/m^2]")
+title("Soil Water - Plant Biomass State Space Diagram")
 legend(legendEntriesPlant)
 
 xlim([0 inf])
-ylim([0 60])
+ylim([0 45])
 axis manual
 
 hold off
