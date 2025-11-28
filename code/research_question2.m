@@ -1,8 +1,20 @@
-% Final Assignment
-
 % Research Question 2
 
-% --- W0 parameter visualization ---
+% Purpose: This code can be used to visualize changes in the model based on varying
+% k2. 
+
+% Use: Leave the parameters as they are, for a proper comparison to the modeled
+% research question 2. If you want to check for other outcomes, feel
+% free to change the parameters:
+
+% Colors for our Model
+blueBase  = [0, 0, 1];     
+blueLight = [0.4, 0.8, 1]; 
+greenBase = [0, 0.6, 0];   
+greenLight = [0.5, 1, 0.5]; 
+
+
+% W0 parameter visualization
 k2vec = [5, 10, 15, 25];
 figure(1);
 hold on
@@ -12,44 +24,38 @@ figure(2);
 hold on
 legendEntriesPlant = {};
 
-
-blueBase  = [0, 0, 1];     % pure blue
-blueLight = [0.4, 0.8, 1]; % light blue
-greenBase = [0, 0.6, 0];   % pure green
-greenLight = [0.5, 1, 0.5]; % light green
-
 for j=1:4
-    % system parameters
-    PPT = 0.8; % find appropriate values
-    P = 5; % initial value
+    % System parameters
+    PPT = 0.8; 
+    P = 5; 
     e = 10;
     k1 = 3;
     k2 = k2vec(j);
     W0 = 0.2;
-    W = 0.2; % initial value
+    W = 0.2; 
     cmax = 0.5;
     d = 0.1;
     b = 0.15;
-    rw = 0.1; % find appropria9te value 
+    rw = 0.1; 
 
-    % --- control parameters ---
+    % Control parameters
     startTime = 0;
     endTime   = 50;
     timeStep  = 0.02;
     
-    % --- compute iteration count ---
+    % Compute iteration count 
     iterations = floor((endTime - startTime)/timeStep) + 1;
     
-    % --- initialize vectors ---
+    % Initialize vectors
     timeV   = zeros(iterations, 1);
     waterV  = zeros(iterations, 1);
     plantV  = zeros(iterations, 1);
     
-    % --- initialize state ---
+    % Initialize state 
     stateW = W;
     stateP = P;
     
-    % --- simulation loop ---
+    % Loop
     for i = 1:iterations
         t = startTime + (i-1)*timeStep;
     
@@ -69,13 +75,11 @@ for j=1:4
         plantV(i) = stateP;
     end
     
-    
-    % --- plots ---
+    % Plots 
     t = (j - 1) / (length(k2vec) - 1);
     waterColor = blueLight * (1 - t) + blueBase * t;
     plantColor = greenLight * (1 - t) + greenBase * t;
 
-    % --- plots ---
     figure(1)
     plot(timeV, waterV, 'Color', waterColor, 'LineWidth', 2)
     legendEntriesWater{end+1} = "Soil Water Content [mm] (K2=" + k2vec(j) + ")";

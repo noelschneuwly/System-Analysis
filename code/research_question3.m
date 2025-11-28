@@ -1,6 +1,17 @@
-% Final Assignment
-
 % Research Question 3
+
+% Purpose: This code can be used to visualize changes in the model based on varying
+% precipitation over time. 
+
+% Use: Leave the parameters as they are, for a proper comparison to the modeled
+% research question 3. If you want to check for other outcomes, feel
+% free to change the parameters:
+
+% Colors for our Model
+blueBase  = [0, 0, 1];     
+blueLight = [0.4, 0.8, 1]; 
+greenBase = [0, 0.6, 0];   
+greenLight = [0.5, 1, 0.5]; 
 
 figure(1);
 hold on
@@ -14,14 +25,9 @@ figure(3);
 hold on
 legendEntriesPPT = {};
 
-blueBase  = [0, 0, 1];     % pure blue
-blueLight = [0.4, 0.8, 1]; % light blue
-greenBase = [0, 0.6, 0];   % pure green
-greenLight = [0.5, 1, 0.5]; % light green
-
 
 for j=1:2
-    % system parameters
+    % System parameters
     PPT = 0 + (1 - 0) * rand;
     P = 5; 
     e = 10;
@@ -34,32 +40,31 @@ for j=1:2
     b = 0.15;
     rw = 0.1; 
     
-    
-    % --- control parameters ---
+    % Control parameters 
     startTime = 0;
     endTime   = 365;
     timeStep  = 0.02;
         
-        % --- compute iteration count ---
+    %Compute iteration count
     iterations = floor((endTime - startTime)/timeStep) + 1;
         
-        % --- initialize vectors ---
+    % Initialize vectors 
     timeV   = zeros(iterations, 1);
     waterV  = zeros(iterations, 1);
     plantV  = zeros(iterations, 1);
     pptV = zeros(iterations, 1);
         
-        % --- initialize state ---
+    %Initialize state ---
     stateW = W;
     stateP = P;
     counter = 0;
         
-        % --- simulation loop ---
+    % Loop
     for i = 1:iterations
         t = startTime + (i-1)*timeStep;
         counter = counter + 1;
         if counter > 50
-            PPT = rand * 0.5; % random in [0, 0.5]
+            PPT = rand * 0.5; 
             counter = 1;
         end
         
@@ -81,13 +86,12 @@ for j=1:2
     end
     
     
-    % --- plots ---
+    % Plots
     t = (j - 1) / (3);
     waterColor = blueLight * (1 - t) + blueBase * t;
     plantColor = greenLight * (1 - t) + greenBase * t;
     pptColor = blueLight * (1 - t) + blueBase * t;
 
-    % --- plots ---
     figure(1)
     plot(timeV, waterV, 'Color', waterColor, 'LineWidth', 2)
     legendEntriesWater{end+1} = "Soil Water Content [mm] for randomized Precipitation Try " + j + "";
